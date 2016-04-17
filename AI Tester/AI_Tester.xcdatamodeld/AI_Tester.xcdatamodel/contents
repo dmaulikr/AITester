@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Automatic">
+    <entity name="Agent" representedClassName=".Agent" syncable="YES">
+        <attribute name="agentDescription" optional="YES" attributeType="String" defaultValueString="Description" syncable="YES"/>
+        <attribute name="agentName" attributeType="String" defaultValueString="New agent" syncable="YES"/>
+        <attribute name="clientAccessToken" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastUpdate" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="uniqueId" attributeType="String" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Message" inverseName="agent" inverseEntity="Message" syncable="YES"/>
+    </entity>
+    <entity name="Message" representedClassName=".Message" syncable="YES">
+        <attribute name="chatPosition" attributeType="String" syncable="YES"/>
+        <attribute name="messageDate" attributeType="Date" syncable="YES"/>
+        <attribute name="messageText" attributeType="String" syncable="YES"/>
+        <attribute name="senderId" attributeType="String" syncable="YES"/>
+        <relationship name="agent" maxCount="1" deletionRule="Nullify" destinationEntity="Agent" inverseName="messages" inverseEntity="Agent" syncable="YES"/>
+        <relationship name="test" maxCount="1" deletionRule="Nullify" destinationEntity="Test" inverseName="messages" inverseEntity="Test" syncable="YES"/>
+    </entity>
+    <entity name="SampleDataStatus" representedClassName=".SampleDataStatus" syncable="YES">
+        <attribute name="imported" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+    </entity>
+    <entity name="Test" representedClassName=".Test" syncable="YES">
+        <attribute name="lastRun" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastUpdate" attributeType="Date" syncable="YES"/>
+        <attribute name="leftAgentUniqueId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="middleAgentUniqueId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rightAgentUniqueId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="testDescription" optional="YES" attributeType="String" defaultValueString="Description" syncable="YES"/>
+        <attribute name="testName" attributeType="String" defaultValueString="New test" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Message" inverseName="test" inverseEntity="Message" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Agent" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="Message" positionX="153" positionY="54" width="128" height="135"/>
+        <element name="SampleDataStatus" positionX="153" positionY="54" width="128" height="60"/>
+        <element name="Test" positionX="520" positionY="18" width="128" height="165"/>
+    </elements>
+</model>
