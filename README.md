@@ -48,20 +48,24 @@ The “AI Tester” app using the following open-source libraries and SDKs insta
 
 
 ## Running the app
-* Download and unzip file. 
+
+### Option 1 (quick evaluation)
+
+### Option 1 (quick evaluation)
+
+* Download and unzip the [AI Tester.zip](https://github.com/SEFdevelopment/AITester/blob/master/AI%20Tester.zip?raw=true) file.
 * Open and run the “AI_Tester.xcworkspace” file (not the AI Tester.xcodeproj!)
+* The project should build without any “pod update” commands.
 
-If you have difficulties with compiling the app because of the third party libraries, do the following:
 
-* In xCode run “Product - Clean”
+### Option 2 (clone repository or ‘Download ZIP’)
 
-If this does not help, then:
-
-* Open the terminal
-* cd the folder in which the app is situated
-* Run the “pod update” command in terminal
-
-More information on Cocoapods can be found here: https://cocoapods.org. 
+* Install Cocoapods, if it is not yet installed on your Mac computer (more info about Cocoapods [https://cocoapods.org](https://cocoapods.org)
+* Clone the ‘AITester’ repository or click ’Download ZIP’ on it.
+* Open the ‘Terminal’ application on the Mac.
+* cd to the folder with the AI Tester application.
+* Run the ‘pod update’ command.
+* Open and run the “AI_Tester.xcworkspace” file (not the AI Tester.xcodeproj!)
 
 
 ## Enjoy! :)
