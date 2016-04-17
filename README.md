@@ -12,10 +12,10 @@ The “AI Tester” iPad app allows simultaneous testing and comparing of severa
 ## Screenshots
 
 
-![Agents screen](https://farm2.staticflickr.com/1572/26479248685_43985b5f82_z.jpg)
+![Agents screen](https://farm2.staticflickr.com/1712/25874373724_ca46484a75_z.jpg)
 
 
-![Tests screen](https://farm2.staticflickr.com/1572/26479248685_29f71d7eb5_z.jpg)
+![Tests screen](https://farm2.staticflickr.com/1572/26479248685_c26373dd67_z.jpg)
 
 
 ![Chat screen](https://farm2.staticflickr.com/1647/25874373694_99dd15f34b_z.jpg)
