@@ -8,6 +8,18 @@ This app is designed for developers who build conversational interfaces based on
 
 The “AI Tester” iPad app allows simultaneous testing and comparing of several artificial intelligence agents.
 
+
+## Screenshots
+Agents screen
+![alt text](https://farm2.staticflickr.com/1712/25874373724_32ff923352_z.jpg "Agents screen")
+
+Tests screen
+![alt text](https://farm2.staticflickr.com/1572/26479248685_29f71d7eb5_z.jpg "Tests screen")
+
+Chat with AI agents screen
+![alt text](https://farm2.staticflickr.com/1647/25874373694_99dd15f34b_z.jpg "Chat with AI agents screen")
+
+
 ## Demo test and agents
 The “AI Tester” app contains one demo test and three demo agents. Since these are only demo agents, they were trained with a limited corpora of knowledge. Nevertheless, you can greet them and ask basic questions.
 
