@@ -51,8 +51,6 @@ The “AI Tester” app using the following open-source libraries and SDKs insta
 
 ### Option 1 (quick evaluation)
 
-### Option 1 (quick evaluation)
-
 * Download and unzip the [AI Tester.zip](https://github.com/SEFdevelopment/AITester/blob/master/AI%20Tester.zip?raw=true) file.
 * Open and run the “AI_Tester.xcworkspace” file (not the AI Tester.xcodeproj!)
 * The project should build without any “pod update” commands.
