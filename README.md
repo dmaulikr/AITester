@@ -10,14 +10,15 @@ The “AI Tester” iPad app allows simultaneous testing and comparing of severa
 
 
 ## Screenshots
+
 Agents screen
-![alt text](https://farm2.staticflickr.com/1712/25874373724_32ff923352_z.jpg "Agents screen")
+![Agents screen](https://farm2.staticflickr.com/1712/25874373724_32ff923352_z.jpg)
 
 Tests screen
-![alt text](https://farm2.staticflickr.com/1572/26479248685_29f71d7eb5_z.jpg "Tests screen")
+![Tests screen](https://farm2.staticflickr.com/1572/26479248685_29f71d7eb5_z.jpg)
 
 Chat with AI agents screen
-![alt text](https://farm2.staticflickr.com/1647/25874373694_99dd15f34b_z.jpg "Chat with AI agents screen")
+![Chat screen](https://farm2.staticflickr.com/1647/25874373694_99dd15f34b_z.jpg)
 
 
 ## Demo test and agents
