@@ -15,7 +15,6 @@
 		E8340A311CBF6C49002955FF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8340A2F1CBF6C49002955FF /* Message.swift */; };
 		E8340A331CBF8345002955FF /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8340A321CBF8345002955FF /* SplitViewController.swift */; };
 		E8340A361CBF845E002955FF /* RoundCornerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8340A351CBF845E002955FF /* RoundCornerButton.swift */; };
-		E86D13BC1CC0429A00E1405B /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = E86D13BB1CC0429A00E1405B /* README.txt */; };
 		E870CA1E1CB4FB7600F57806 /* BlankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E870CA1D1CB4FB7600F57806 /* BlankViewController.swift */; };
 		E89D18AB1CB239E800F648E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89D18AA1CB239E800F648E2 /* AppDelegate.swift */; };
 		E89D18B31CB239E800F648E2 /* AI_Tester.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E89D18B11CB239E800F648E2 /* AI_Tester.xcdatamodeld */; };
@@ -49,7 +48,6 @@
 		E8340A2F1CBF6C49002955FF /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		E8340A321CBF8345002955FF /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		E8340A351CBF845E002955FF /* RoundCornerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundCornerButton.swift; sourceTree = "<group>"; };
-		E86D13BB1CC0429A00E1405B /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		E870CA1D1CB4FB7600F57806 /* BlankViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlankViewController.swift; sourceTree = "<group>"; };
 		E89D18A71CB239E800F648E2 /* AI Tester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AI Tester.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89D18AA1CB239E800F648E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 		E89D18A91CB239E800F648E2 /* AI Tester */ = {
 			isa = PBXGroup;
 			children = (
-				E86D13BB1CC0429A00E1405B /* README.txt */,
 				E89D18AA1CB239E800F648E2 /* AppDelegate.swift */,
 				E83398CA1CBE4BF900ABB3E7 /* ApiAi sample data */,
 				E8E1E0BF1CB253A0005DAA13 /* Core Data */,
@@ -311,7 +308,6 @@
 			files = (
 				E8AC4FC61CBD056E00447C4F /* Main.storyboard in Resources */,
 				E89D18B81CB239E800F648E2 /* LaunchScreen.storyboard in Resources */,
-				E86D13BC1CC0429A00E1405B /* README.txt in Resources */,
 				E89D18B51CB239E800F648E2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
