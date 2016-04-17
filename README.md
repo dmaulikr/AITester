@@ -56,10 +56,10 @@ The “AI Tester” app using the following open-source libraries and SDKs insta
 * The project should build without any “pod update” commands.
 
 
-### Option 2 (clone repository or ‘Download ZIP’)
+### Option 2 (clone repository or "Download ZIP")
 
 * Install Cocoapods, if it is not yet installed on your Mac computer (more info about Cocoapods [https://cocoapods.org](https://cocoapods.org)
-* Clone the "AITester" repository or click ’Download ZIP’ on it.
+* Clone the "AITester" repository or click "Download ZIP" on it.
 * Open the "Terminal" application on the Mac.
 * cd to the folder with the AI Tester application.
 * Run the "pod update" command.
