@@ -177,7 +177,7 @@ extension CoreDataManager {
             
         }
         
-        insertNewTest()
+        _ = insertNewTest()
         
         insertSampleDataStatus()
         
