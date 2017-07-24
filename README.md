@@ -8,6 +8,19 @@ This app is designed for developers who build conversational interfaces based on
 
 The “AI Tester” iPad app allows simultaneous testing and comparing of several artificial intelligence agents.
 
+
+## Screenshots
+
+
+![Agents screen](https://farm2.staticflickr.com/1712/25874373724_ca46484a75_z.jpg)
+
+
+![Tests screen](https://farm2.staticflickr.com/1572/26479248685_c26373dd67_z.jpg)
+
+
+![Chat screen](https://farm2.staticflickr.com/1647/25874373694_99dd15f34b_z.jpg)
+
+
 ## Demo test and agents
 The “AI Tester” app contains one demo test and three demo agents. Since these are only demo agents, they were trained with a limited corpora of knowledge. Nevertheless, you can greet them and ask basic questions.
 
@@ -35,20 +48,22 @@ The “AI Tester” app using the following open-source libraries and SDKs insta
 
 
 ## Running the app
-* Download and unzip file. 
+
+### Option 1 (quick evaluation)
+
+* Download and unzip the [AI Tester.zip](https://github.com/SEFdevelopment/AITester/blob/master/AI%20Tester.zip?raw=true) file.
 * Open and run the “AI_Tester.xcworkspace” file (not the AI Tester.xcodeproj!)
+* The project should build without any “pod update” commands.
 
-If you have difficulties with compiling the app because of the third party libraries, do the following:
 
-* In xCode run “Product - Clean”
+### Option 2 (clone repository or "Download ZIP")
 
-If this does not help, then:
-
-* Open the terminal
-* cd the folder in which the app is situated
-* Run the “pod update” command in terminal
-
-More information on Cocoapods can be found here: https://cocoapods.org. 
+* Install Cocoapods, if it is not yet installed on your Mac computer (more info about Cocoapods [https://cocoapods.org](https://cocoapods.org)
+* Clone the "AITester" repository or click "Download ZIP" on it.
+* Open the "Terminal" application on the Mac.
+* cd to the folder with the AI Tester application.
+* Run the "pod update" command.
+* Open and run the “AI_Tester.xcworkspace” file (not the AI Tester.xcodeproj!)
 
 
 ## Enjoy! :)
