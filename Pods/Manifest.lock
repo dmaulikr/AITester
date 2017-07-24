@@ -1,52 +1,48 @@
 PODS:
-  - ApiAI (0.5.0):
-    - ApiAI/AudioFileConverter (= 0.5.0)
-    - ApiAI/Core (= 0.5.0)
-    - ApiAI/ResponseMapping (= 0.5.0)
-    - ApiAI/UIKit (= 0.5.0)
-    - ApiAI/UserEntities (= 0.5.0)
-    - ApiAI/VoiceFileRequest (= 0.5.0)
-    - ApiAI/VoiceRequest (= 0.5.0)
-  - ApiAI/AudioFileConverter (0.5.0):
+  - ApiAI (0.7.0):
+    - ApiAI/AudioFileConverter (= 0.7.0)
+    - ApiAI/Core (= 0.7.0)
+    - ApiAI/Events (= 0.7.0)
+    - ApiAI/ResponseMapping (= 0.7.0)
+    - ApiAI/UIKit (= 0.7.0)
+    - ApiAI/UserEntities (= 0.7.0)
+    - ApiAI/VoiceFileRequest (= 0.7.0)
+    - ApiAI/VoiceRequest (= 0.7.0)
+  - ApiAI/AudioFileConverter (0.7.0):
     - ApiAI/Core
-  - ApiAI/Core (0.5.0)
-  - ApiAI/ResponseMapping (0.5.0):
+  - ApiAI/Core (0.7.0)
+  - ApiAI/Events (0.7.0):
     - ApiAI/Core
-  - ApiAI/UIKit (0.5.0):
+  - ApiAI/ResponseMapping (0.7.0):
+    - ApiAI/Core
+  - ApiAI/UIKit (0.7.0):
     - ApiAI/Core
     - ApiAI/VoiceRequest
-  - ApiAI/UserEntities (0.5.0):
+  - ApiAI/UserEntities (0.7.0):
     - ApiAI/Core
-  - ApiAI/VoiceFileRequest (0.5.0):
+  - ApiAI/VoiceFileRequest (0.7.0):
     - ApiAI/Core
-  - ApiAI/VoiceRequest (0.5.0):
+  - ApiAI/VoiceRequest (0.7.0):
     - ApiAI/Core
-  - JSQMessagesViewController (7.2.0):
+  - JSQMessagesViewController (7.3.5):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
-  - SwiftyJSON (2.3.2)
-  - UnderKeyboard (4.0.2)
+  - SwiftyJSON (3.1.4)
+  - UnderKeyboard (8.0.3)
 
 DEPENDENCIES:
   - ApiAI
   - JSQMessagesViewController
-  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
-  - UnderKeyboard (~> 4.0)
-
-EXTERNAL SOURCES:
-  SwiftyJSON:
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
-
-CHECKOUT OPTIONS:
-  SwiftyJSON:
-    :commit: 2a5b70f06001316d4fb54501edc70b4084705da0
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  - SwiftyJSON
+  - UnderKeyboard
 
 SPEC CHECKSUMS:
-  ApiAI: 139e372e036bf6dde4e3e79c4e10bdf675d1d634
-  JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
+  ApiAI: 25f763ddd88139dc5fe6794a905300244190d168
+  JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
-  UnderKeyboard: 6ec3057822332c985806da7c36b8dd57647d54e9
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  UnderKeyboard: 5a2e2cf7eab78711bad2c58167ddd4ab8b463112
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: b0b33209dbf62432172aec03c2e8c6abb4d0d0e6
+
+COCOAPODS: 1.2.0

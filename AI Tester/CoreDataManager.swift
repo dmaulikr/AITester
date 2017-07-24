@@ -68,30 +68,30 @@ extension CoreDataManager {
     
     func insertNewAgent() -> Agent {
         
-        let agentEntity = NSEntityDescription.entityForName(agentEntityName, inManagedObjectContext: managedObjectContext)!
-        let agent = Agent(entity: agentEntity, insertIntoManagedObjectContext: managedObjectContext)
+        let agentEntity = NSEntityDescription.entity(forEntityName: agentEntityName, in: managedObjectContext)!
+        let agent = Agent(entity: agentEntity, insertInto: managedObjectContext)
         
-        let uniqueId = NSUUID().UUIDString
+        let uniqueId = UUID().uuidString
         agent.uniqueId = uniqueId
         
-        agent.lastUpdate = NSDate()
+        agent.lastUpdate = Date()
         
         return agent
         
     }
     
-    func deleteAgent(agent: Agent) {
+    func deleteAgent(_ agent: Agent) {
         
-        managedObjectContext.deleteObject(agent)
+        managedObjectContext.delete(agent)
         
     }
     
     
     func numberOfAgents() -> Int {
         
-        let fetchRequest = NSFetchRequest(entityName: agentEntityName)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: agentEntityName)
         
-        let numberOfAgents = managedObjectContext.countForFetchRequest(fetchRequest, error: nil)
+        let numberOfAgents = managedObjectContext.count(for: fetchRequest, error: nil)
         
         return numberOfAgents
         
@@ -100,7 +100,7 @@ extension CoreDataManager {
     
     func agentsSortedByName() -> [Agent]? {
         
-        let fetchRequest = NSFetchRequest(entityName: agentEntityName)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: agentEntityName)
         let sortByNameDescriptor = NSSortDescriptor(key: agentNameKey, ascending: true)
         fetchRequest.sortDescriptors = [sortByNameDescriptor]
         
@@ -108,7 +108,7 @@ extension CoreDataManager {
         
         do {
             
-            agents = try managedObjectContext.executeFetchRequest(fetchRequest) as? [Agent]
+            agents = try managedObjectContext.fetch(fetchRequest) as? [Agent]
             
         } catch {
             
@@ -120,17 +120,17 @@ extension CoreDataManager {
         
     }
     
-    func fetchAgentForUniqueId(uniqueId: String) -> Agent? {
+    func fetchAgentForUniqueId(_ uniqueId: String) -> Agent? {
         
         var agent: Agent?
         
-        let agentForUniqueIdFetchRequest = NSFetchRequest(entityName: agentEntityName)
+        let agentForUniqueIdFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: agentEntityName)
         
         agentForUniqueIdFetchRequest.predicate = NSPredicate(format: "uniqueId == %@", uniqueId)
         
         do {
             
-            let agents = try managedObjectContext.executeFetchRequest(agentForUniqueIdFetchRequest) as! [Agent]
+            let agents = try managedObjectContext.fetch(agentForUniqueIdFetchRequest) as! [Agent]
             
             guard agents.count > 0 else { return nil }
             
@@ -178,19 +178,19 @@ extension CoreDataManager {
     }
     
     
-    func insertNewAgentWithSampleData(sampleAgentDictionary: [String: String]) {
+    func insertNewAgentWithSampleData(_ sampleAgentDictionary: [String: String]) {
         
-        let agentEntity = NSEntityDescription.entityForName(agentEntityName, inManagedObjectContext: managedObjectContext)!
-        let agent = Agent(entity: agentEntity, insertIntoManagedObjectContext: managedObjectContext)
+        let agentEntity = NSEntityDescription.entity(forEntityName: agentEntityName, in: managedObjectContext)!
+        let agent = Agent(entity: agentEntity, insertInto: managedObjectContext)
         
         agent.agentName = sampleAgentDictionary[SampleAgentsDictionaryKeys.agentName]!
         agent.agentDescription = sampleAgentDictionary[SampleAgentsDictionaryKeys.agentDescription]!
         agent.clientAccessToken = sampleAgentDictionary[SampleAgentsDictionaryKeys.clientAccessToken]!
         
-        let uniqueId = NSUUID().UUIDString
+        let uniqueId = UUID().uuidString
         agent.uniqueId = uniqueId
         
-        agent.lastUpdate = NSDate()
+        agent.lastUpdate = Date()
 
         
     }
@@ -199,9 +199,9 @@ extension CoreDataManager {
     
     func insertSampleDataStatus() {
         
-        let sampleDataStatusEntity = NSEntityDescription.entityForName(sampleDataStatusEntityName, inManagedObjectContext: managedObjectContext)!
+        let sampleDataStatusEntity = NSEntityDescription.entity(forEntityName: sampleDataStatusEntityName, in: managedObjectContext)!
         
-        let _ = SampleDataStatus(entity: sampleDataStatusEntity, insertIntoManagedObjectContext: managedObjectContext)
+        let _ = SampleDataStatus(entity: sampleDataStatusEntity, insertInto: managedObjectContext)
         
     }
     
@@ -210,11 +210,11 @@ extension CoreDataManager {
         
         var sampleDataStatus: SampleDataStatus?
         
-        let sampleDataStatusFetchRequest = NSFetchRequest(entityName: sampleDataStatusEntityName)
+        let sampleDataStatusFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: sampleDataStatusEntityName)
         
         do {
             
-            let results = try managedObjectContext.executeFetchRequest(sampleDataStatusFetchRequest) as! [SampleDataStatus]
+            let results = try managedObjectContext.fetch(sampleDataStatusFetchRequest) as! [SampleDataStatus]
             
             guard results.count > 0 else { return nil }
             
@@ -241,20 +241,20 @@ extension CoreDataManager {
     
     func insertNewTest() -> Test {
         
-        let testEntity = NSEntityDescription.entityForName(testEntityName, inManagedObjectContext: managedObjectContext)!
+        let testEntity = NSEntityDescription.entity(forEntityName: testEntityName, in: managedObjectContext)!
         
-        let test = Test(entity: testEntity, insertIntoManagedObjectContext: managedObjectContext)
+        let test = Test(entity: testEntity, insertInto: managedObjectContext)
         
-        test.lastUpdate = NSDate()
+        test.lastUpdate = Date()
         
         return test
         
     }
     
     
-    func deleteTest(test: Test) {
+    func deleteTest(_ test: Test) {
         
-        managedObjectContext.deleteObject(test)
+        managedObjectContext.delete(test)
         
     }
     
@@ -264,23 +264,23 @@ extension CoreDataManager {
 // MARK: - AI Messages
 extension CoreDataManager {
     
-    func insertMessage(agent agent: Agent, test: Test, chatPosition: String, messageText: String, senderId: String) {
+    func insertMessage(agent: Agent, test: Test, chatPosition: String, messageText: String, senderId: String) {
         
-        let messageEntity = NSEntityDescription.entityForName(messageEntityName, inManagedObjectContext: managedObjectContext)!
+        let messageEntity = NSEntityDescription.entity(forEntityName: messageEntityName, in: managedObjectContext)!
         
-        let message = Message(entity: messageEntity, insertIntoManagedObjectContext: managedObjectContext)
+        let message = Message(entity: messageEntity, insertInto: managedObjectContext)
         
         message.agent = agent
         message.test = test
         message.chatPosition = chatPosition
         message.messageText = messageText
         message.senderId = senderId
-        message.messageDate = NSDate()
+        message.messageDate = Date()
 
     }
     
     
-    func deleteMessagesForTest(test: Test) {
+    func deleteMessagesForTest(_ test: Test) {
         
         guard let messages = test.messages else { return }
         
@@ -288,16 +288,16 @@ extension CoreDataManager {
         
         for message in messages {
             
-            managedObjectContext.deleteObject(message as! NSManagedObject)
+            managedObjectContext.delete(message as! NSManagedObject)
             
         }
         
     }
     
     
-    func fetchMessagesForTest(test: Test, agent: Agent, chatPosition: String) -> [Message]? {
+    func fetchMessagesForTest(_ test: Test, agent: Agent, chatPosition: String) -> [Message]? {
         
-        let fetchRequest = NSFetchRequest(entityName: messageEntityName)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: messageEntityName)
         
         let sortByNameDescriptor = NSSortDescriptor(key: messageDateKey, ascending: true)
         fetchRequest.sortDescriptors = [sortByNameDescriptor]
@@ -308,7 +308,7 @@ extension CoreDataManager {
         
         do {
             
-            messages = try managedObjectContext.executeFetchRequest(fetchRequest) as? [Message]
+            messages = try managedObjectContext.fetch(fetchRequest) as? [Message]
             
         } catch {
             

@@ -11,9 +11,9 @@ import UIKit
 class SplitViewController: UISplitViewController {
 
     // MARK: - White status bar
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle : UIStatusBarStyle {
         
-        return UIStatusBarStyle.LightContent
+        return UIStatusBarStyle.lightContent
         
     }
     

@@ -34,7 +34,7 @@ class ContainerViewController: UIViewController {
     // MARK: - METHODS
     
     // MARK: - View controller life cycle
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         underKeyboardLayoutConstraint.setup(keyboardHeightLayoutConstraint, view: view, bottomLayoutGuide: bottomLayoutGuide)
@@ -42,19 +42,19 @@ class ContainerViewController: UIViewController {
     }
     
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        test.lastRun = NSDate()
+        test.lastRun = Date()
         
         coreDataManager.saveContext()
     }
     
 
     // MARK: - Black status bar
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+    override var preferredStatusBarStyle : UIStatusBarStyle {
         
-        return UIStatusBarStyle.Default
+        return UIStatusBarStyle.default
         
     }
     
@@ -64,11 +64,11 @@ class ContainerViewController: UIViewController {
         
         view.endEditing(true)
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
         
     }
     
-    @IBAction func sendButtonTapped(sender: AnyObject) {
+    @IBAction func sendButtonTapped(_ sender: AnyObject) {
         
         guard let textToSend = inputTextField.text else { return }
         guard !textToSend.isEmpty else { return }
@@ -76,15 +76,15 @@ class ContainerViewController: UIViewController {
         
         inputTextField.text = ""
         
-        let userInfoDictionary: [NSObject: AnyObject] = [Notifications.messageTextKey: textToSend, Notifications.messageDateKey: NSDate()]
+        let userInfoDictionary: [AnyHashable: Any] = [Notifications.messageTextKey: textToSend, Notifications.messageDateKey: Date()]
         
-        NSNotificationCenter.defaultCenter().postNotificationName(Notifications.inputTextFieldNotification, object: nil, userInfo: userInfoDictionary)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: Notifications.inputTextFieldNotification), object: nil, userInfo: userInfoDictionary)
         
     }
     
     
     // MARK: - Storyboard segues
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == Identifiers.containerToLeftChatSegue {
             
@@ -108,9 +108,9 @@ class ContainerViewController: UIViewController {
         
     }
     
-    func passAgentToChatViewController(agentUniqueId: String?, segue: UIStoryboardSegue, chatPosition: String) {
+    func passAgentToChatViewController(_ agentUniqueId: String?, segue: UIStoryboardSegue, chatPosition: String) {
         
-        let navigationController = segue.destinationViewController as! UINavigationController
+        let navigationController = segue.destination as! UINavigationController
         
         let chatViewController = navigationController.topViewController as! ChatViewController
         
@@ -131,12 +131,12 @@ class ContainerViewController: UIViewController {
         let message = NSLocalizedString("There seem to be no internet connection. Please turn on the internet on your device and try again.", comment: "")
         let cancelButtonTitle = NSLocalizedString("Dismiss", comment: "")
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
 }
@@ -147,7 +147,7 @@ class ContainerViewController: UIViewController {
 // MARK: - UITextField delegate
 extension ContainerViewController: UITextFieldDelegate {
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         sendButtonTapped(self)
         

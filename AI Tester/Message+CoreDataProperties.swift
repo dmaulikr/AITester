@@ -15,7 +15,7 @@ import CoreData
 extension Message {
 
     @NSManaged var chatPosition: String
-    @NSManaged var messageDate: NSDate
+    @NSManaged var messageDate: Date
     @NSManaged var messageText: String
     @NSManaged var senderId: String
     @NSManaged var agent: Agent

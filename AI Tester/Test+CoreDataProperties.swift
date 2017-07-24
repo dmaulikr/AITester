@@ -14,8 +14,8 @@ import CoreData
 
 extension Test {
 
-    @NSManaged var lastUpdate: NSDate
-    @NSManaged var lastRun: NSDate?
+    @NSManaged var lastUpdate: Date
+    @NSManaged var lastRun: Date?
     @NSManaged var leftAgentUniqueId: String?
     @NSManaged var middleAgentUniqueId: String?
     @NSManaged var rightAgentUniqueId: String?

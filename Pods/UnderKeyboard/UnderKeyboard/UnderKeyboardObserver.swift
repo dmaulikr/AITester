@@ -6,9 +6,9 @@ Detects appearance of software keyboard and calls the supplied closures that can
 
 */
 public final class UnderKeyboardObserver: NSObject {
-  public typealias AnimationCallback = (height: CGFloat) -> ()
+  public typealias AnimationCallback = (_ height: CGFloat) -> ()
   
-  let notificationCenter: NSNotificationCenter
+  let notificationCenter: NotificationCenter
   
   /// Function that will be called before the keyboard is shown and before animation is started.
   public var willAnimateKeyboard: AnimationCallback?
@@ -19,8 +19,9 @@ public final class UnderKeyboardObserver: NSObject {
   /// Current height of the keyboard. Has value `nil` if unknown.
   public var currentKeyboardHeight: CGFloat?
   
+  /// Creates an instance of the class
   public override init() {
-    notificationCenter = NSNotificationCenter.defaultCenter()
+    notificationCenter = NotificationCenter.default
     super.init()
   }
   
@@ -32,8 +33,8 @@ public final class UnderKeyboardObserver: NSObject {
   public func start() {
     stop()
     
-    notificationCenter.addObserver(self, selector: Selector("keyboardNotification:"), name:UIKeyboardWillShowNotification, object: nil);
-    notificationCenter.addObserver(self, selector: Selector("keyboardNotification:"), name:UIKeyboardWillHideNotification, object: nil);
+    notificationCenter.addObserver(self, selector: #selector(UnderKeyboardObserver.keyboardNotification(_:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+    notificationCenter.addObserver(self, selector: #selector(UnderKeyboardObserver.keyboardNotification(_:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
   }
   
   /// Stop listening for keyboard notifications.
@@ -43,22 +44,22 @@ public final class UnderKeyboardObserver: NSObject {
   
   // MARK: - Notification
   
-  func keyboardNotification(notification: NSNotification) {
-    let isShowing = notification.name == UIKeyboardWillShowNotification
+  func keyboardNotification(_ notification: Notification) {
+    let isShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
     
-    if let userInfo = notification.userInfo,
-      let height = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue().height,
-      let duration: NSTimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
+    if let userInfo = (notification as NSNotification).userInfo,
+      let height = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height,
+      let duration: TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue,
       let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber {
         
       let correctedHeight = isShowing ? height : 0
-      willAnimateKeyboard?(height: correctedHeight)
+      willAnimateKeyboard?(correctedHeight)
         
-      UIView.animateWithDuration(duration,
-        delay: NSTimeInterval(0),
-        options: UIViewAnimationOptions(rawValue: animationCurveRawNSN.unsignedLongValue),
+      UIView.animate(withDuration: duration,
+        delay: TimeInterval(0),
+        options: UIViewAnimationOptions(rawValue: animationCurveRawNSN.uintValue),
         animations: { [weak self] in
-          self?.animateKeyboard?(height: correctedHeight)
+          self?.animateKeyboard?(correctedHeight)
         },
         completion: nil
       )

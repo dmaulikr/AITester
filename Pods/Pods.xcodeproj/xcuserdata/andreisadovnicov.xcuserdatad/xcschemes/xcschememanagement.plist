@@ -6,63 +6,63 @@
 	<dict>
 		<key>ApiAI.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>JSQMessagesViewController.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>JSQSystemSoundPlayer.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>Pods-AI Tester.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>UnderKeyboard.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0E4E37482C3143283180EFC637AEE27D</key>
+		<key>427F15D9B29CC289FE72E7CE992A99ED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>469F202B5A18E0096726222292ECAA46</key>
+		<key>AA1A10F51779DEE8FF962A7B0C98A6A0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>842054668C97F0A4C9211B294A104A60</key>
+		<key>AC09BDA2D80A77BCB18DCDB05412D1E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8FDA0553188429177FEDCC9E81C91E0D</key>
+		<key>C7DCF2B547F7871B9BFD74DE93B0E173</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>95DB89A8BFC5FF0BF98458651D0163CD</key>
+		<key>D0581AF7BF4A6DA140D280B19ECC7BFF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EDA125ADA52355B7CA6DF7BA96918357</key>
+		<key>F84289E5D68795B0D1457EC1F38AE4BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

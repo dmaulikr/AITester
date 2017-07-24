@@ -21,10 +21,25 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AINullabilityDefines.h"
+
+@class AIVoiceRequest;
+
 typedef void(^AIVoiceRequestButtonSuccess)(id response);
 typedef void(^AIVoiceRequestButtonFailure)(NSError *error);
 
-//IB_DESIGNABLE
+typedef void(^AIVoiceRequestPrepareRequest)(AIVoiceRequest *voiceRequest);
+
+/*!
+ API.AI speech recognition is going to be deprecated soon.
+ Use Google Cloud Speech API or other solutions.
+ 
+ This is request type available only for old paid plans.
+ It doesn't working for new users.
+ 
+ Will be removed on 1 Feb 2016.
+ */
+AI_DEPRECATED_MSG_ATTRIBUTE("Will be removed on 1 Feb 2016.")
 @interface AIVoiceRequestButton : UIControl
 
 @property(nonatomic, copy) IBInspectable UIColor *color;
@@ -35,6 +50,9 @@ typedef void(^AIVoiceRequestButtonFailure)(NSError *error);
 
 @property(nonatomic ,copy) AIVoiceRequestButtonFailure failureCallback;
 -(void)setFailureCallback:(AIVoiceRequestButtonFailure)failureCallback;
+
+@property(nonatomic ,copy) AIVoiceRequestPrepareRequest prepareRequest;
+-(void)setPrepareRequest:(AIVoiceRequestPrepareRequest)prepareRequest;
 
 @property(nonatomic, assign, readonly) BOOL isProcessing;
 

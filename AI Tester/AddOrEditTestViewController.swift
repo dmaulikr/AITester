@@ -34,7 +34,7 @@ class AddOrEditTestViewController: UIViewController {
     let rightComponent = 2
     
     // MARK: - Date formatter
-    var dateFormatter: NSDateFormatter!
+    var dateFormatter: DateFormatter!
     
     // MARK: - METHODS
     
@@ -54,34 +54,34 @@ class AddOrEditTestViewController: UIViewController {
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(textInTextFieldsChanged), name: UITextFieldTextDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textInTextFieldsChanged), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
         
        selectAgentsInPickerViewForTest(test)
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         coreDataManager.saveContext()
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         
     }
 
     
     // MARK: - @IBActions
-    @IBAction func runTestButtonTapped(sender: UIButton) {
+    @IBAction func runTestButtonTapped(_ sender: UIButton) {
         
-        performSegueWithIdentifier(Identifiers.testToRunTestSegue, sender: nil)
+        performSegue(withIdentifier: Identifiers.testToRunTestSegue, sender: nil)
         
     }
     
     
-    @IBAction func deleteTestHistoryButtonTapped(sender: UIButton) {
+    @IBAction func deleteTestHistoryButtonTapped(_ sender: UIButton) {
         
         showDeleteHistoryAlert()
         
@@ -96,7 +96,7 @@ class AddOrEditTestViewController: UIViewController {
 
         if let lastRunDate = test.lastRun {
             
-            let dateString = dateFormatter.stringFromDate(lastRunDate)
+            let dateString = dateFormatter.string(from: lastRunDate as Date)
             
             lastRunTextField.text = dateString
             
@@ -115,7 +115,7 @@ class AddOrEditTestViewController: UIViewController {
     // MARK: - Save test text info
     func saveTestTextInfo() {
         
-        test.lastUpdate = NSDate()
+        test.lastUpdate = Date()
         test.testName = testNameTextField.text!
         test.testDescription = testDescriptionTextField.text
         
@@ -131,11 +131,11 @@ class AddOrEditTestViewController: UIViewController {
     
     
     // MARK: - Prepare for segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == Identifiers.testToRunTestSegue {
             
-            let containerViewController = segue.destinationViewController as! ContainerViewController
+            let containerViewController = segue.destination as! ContainerViewController
             
                 containerViewController.leftAgentUniqueId = test.leftAgentUniqueId
                 containerViewController.middleAgentUniqueId = test.middleAgentUniqueId
@@ -157,13 +157,13 @@ class AddOrEditTestViewController: UIViewController {
 // MARK: - UIPickerViewDataSource
 extension AddOrEditTestViewController: UIPickerViewDataSource {
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         
         return 3
         
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         // There will be always one row for a case that there is no agent
         let numberOfRowsInPickerView = coreDataManager.numberOfAgents() + 1
@@ -178,7 +178,7 @@ extension AddOrEditTestViewController: UIPickerViewDataSource {
 // MARK: - UIPickerViewDelegate
 extension AddOrEditTestViewController: UIPickerViewDelegate {
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if row == 0 {
             
@@ -194,9 +194,9 @@ extension AddOrEditTestViewController: UIPickerViewDelegate {
         
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        test.lastUpdate = NSDate()
+        test.lastUpdate = Date()
         
         guard agents.count > 0 else { return }
         
@@ -244,7 +244,7 @@ extension AddOrEditTestViewController: UIPickerViewDelegate {
 // MARK: - UIPickerView selection
 extension AddOrEditTestViewController {
     
-    func selectAgentsInPickerViewForTest(test: Test) {
+    func selectAgentsInPickerViewForTest(_ test: Test) {
         
         // Left component
         if let leftSelectedAgentUniqueId = test.leftAgentUniqueId {
@@ -286,7 +286,7 @@ extension AddOrEditTestViewController {
         
     }
     
-    func selectRowForAgentWithUniqueId(uniqueId: String, inComponent component: Int) {
+    func selectRowForAgentWithUniqueId(_ uniqueId: String, inComponent component: Int) {
         
         if let indexOfSelectedAgent = indexOfSelectedAgentWithUniqueId(uniqueId) {
             
@@ -302,11 +302,11 @@ extension AddOrEditTestViewController {
     
     
     
-    func indexOfSelectedAgentWithUniqueId(uniqueId: String) -> Int? {
+    func indexOfSelectedAgentWithUniqueId(_ uniqueId: String) -> Int? {
         
         if let selectedAgent = coreDataManager.fetchAgentForUniqueId(uniqueId) {
             
-            return agents.indexOf(selectedAgent)
+            return agents.index(of: selectedAgent)
             
         } else {
             
@@ -328,14 +328,14 @@ extension AddOrEditTestViewController {
         let cancelButtonTitle = NSLocalizedString("Cancel", comment: "")
         let otherButtonTitle = NSLocalizedString("Delete", comment: "")
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         // Create the actions.
-        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .Cancel) { _ in
+        let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel) { _ in
             
         }
         
-        let otherAction = UIAlertAction(title: otherButtonTitle, style: .Destructive) { _ in
+        let otherAction = UIAlertAction(title: otherButtonTitle, style: .destructive) { _ in
             self.coreDataManager.deleteMessagesForTest(self.test)
         }
         
@@ -343,7 +343,7 @@ extension AddOrEditTestViewController {
         alertController.addAction(cancelAction)
         alertController.addAction(otherAction)
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     

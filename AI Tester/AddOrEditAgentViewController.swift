@@ -42,19 +42,19 @@ class AddOrEditAgentViewController: UIViewController {
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(textInTextFieldsChanged), name: UITextFieldTextDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(textInTextFieldsChanged), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         
         coreDataManager.saveContext()
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         
     }
     
@@ -80,7 +80,7 @@ class AddOrEditAgentViewController: UIViewController {
     // MARK: - Save agent info
     func saveAgentInfo() {
         
-        agent.lastUpdate = NSDate()
+        agent.lastUpdate = Date()
         agent.agentName = agentNameTextField.text!
         agent.agentDescription = agentDescriptionTextField.text
         agent.clientAccessToken = clientAccessTokenTextField.text

@@ -32,11 +32,11 @@ class RoundCornersButton: UIButton {
         }
     }
     
-    @IBInspectable var borderColor: UIColor? = UIColor.whiteColor() {
+    @IBInspectable var borderColor: UIColor? = UIColor.white {
         
         didSet {
             
-            layer.borderColor = borderColor?.CGColor
+            layer.borderColor = borderColor?.cgColor
             
         }
     }

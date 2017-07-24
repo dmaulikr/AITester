@@ -71,23 +71,23 @@ class ChatViewController: JSQMessagesViewController {
         
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didReiveInputTextFieldNotification(_:)), name: Notifications.inputTextFieldNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReiveInputTextFieldNotification(_:)), name: NSNotification.Name(rawValue: Notifications.inputTextFieldNotification), object: nil)
         
     }
     
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         
     }
     
     // MARK: - @IBActions
-    @IBAction func testsButtonTapped(sender: UIBarButtonItem) {
+    @IBAction func testsButtonTapped(_ sender: UIBarButtonItem) {
         
         containerViewController.testsButtonTapped()
         
@@ -95,31 +95,31 @@ class ChatViewController: JSQMessagesViewController {
     
     
     // MARK: - Message data
-    override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
         
         return messages[indexPath.item]
         
     }
     
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return messages.count
         
     }
 
-    func addMessage(id: String, text: String) {
+    func addMessage(_ id: String, text: String) {
         
         let message = JSQMessage(senderId: id, displayName: "", text: text)
         
-        messages.append(message)
+        messages.append(message!)
         
         coreDataManager.insertMessage(agent: agent!, test: test, chatPosition: chatPosition, messageText: text, senderId: id)
 
     }
     
     
-    override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
+    override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         
         addMessage(senderId, text: text)
         
@@ -128,21 +128,21 @@ class ChatViewController: JSQMessagesViewController {
         
     }
     
-    func didReiveInputTextFieldNotification(notification: NSNotification) {
+    func didReiveInputTextFieldNotification(_ notification: Notification) {
         
         guard agent != nil else { return }
         
         guard let userInfo = notification.userInfo else { return }
         guard let messageText = userInfo[Notifications.messageTextKey] as? String else { return }
-        guard let messageDate = userInfo[Notifications.messageDateKey] as? NSDate else { return }
+        guard let messageDate = userInfo[Notifications.messageDateKey] as? Date else { return }
         
-        didPressSendButton(nil, withMessageText: messageText, senderId: senderId, senderDisplayName: senderDisplayName, date: messageDate)
+        didPressSend(nil, withMessageText: messageText, senderId: senderId, senderDisplayName: senderDisplayName, date: messageDate)
         
         getAnswerFromApiAiForText(messageText)
     }
     
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
     
         let message = messages[indexPath.item]
         
@@ -182,7 +182,7 @@ class ChatViewController: JSQMessagesViewController {
     
     
     // MARK: - Remove avatars support
-    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         
         return nil
         
@@ -190,25 +190,25 @@ class ChatViewController: JSQMessagesViewController {
     
     
     // MARK: - Set text color
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         
         let message = messages[indexPath.item]
         
         if message.senderId == senderId {
             
-            cell.textView!.textColor = UIColor.whiteColor()
+            cell.textView!.textColor = UIColor.white
             
         } else {
             
-            cell.textView!.textColor = UIColor.blackColor()
+            cell.textView!.textColor = UIColor.black
             
         }
         
         cell.textView.linkTextAttributes = [
-            NSForegroundColorAttributeName: UIColor.blueColor(),
-            NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue
+            NSForegroundColorAttributeName: UIColor.blue,
+            NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue
         ]
         
         return cell
@@ -227,8 +227,8 @@ class ChatViewController: JSQMessagesViewController {
         setupBubbles()
         
         // No avatars
-        collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
-        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
+        collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
+        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
         
         // No input bar
         inputToolbar.removeFromSuperview()
@@ -238,8 +238,8 @@ class ChatViewController: JSQMessagesViewController {
     func setupBubbles() {
         
         let factory = JSQMessagesBubbleImageFactory()
-        outgoingBubbleImageView = factory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
-        incomingBubbleImageView = factory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
+        outgoingBubbleImageView = factory?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
+        incomingBubbleImageView = factory?.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
         
         collectionView.collectionViewLayout.messageBubbleLeftRightMargin = 40.0
         
@@ -277,18 +277,18 @@ extension ChatViewController {
     }
     
     
-    func getAnswerFromApiAiForText(text: String) {
+    func getAnswerFromApiAiForText(_ text: String) {
         
         let request = apiAi.textRequest()
-        request.query = text
+        request?.query = text
         
-        request.setCompletionBlockSuccess({ request, response in
+        request?.setCompletionBlockSuccess({ request, response in
             
             let json = JSON(response)
             
             let apiAiAnswer = json["result"]["fulfillment"]["speech"].stringValue
             
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 
                 if apiAiAnswer == "" {
                     
@@ -301,7 +301,7 @@ extension ChatViewController {
                 
                 self.finishReceivingMessage()
                 
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 
                 self.showTypingIndicator = false
                 
@@ -309,9 +309,9 @@ extension ChatViewController {
             
             }, failure: { request, error in
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     
-                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     
                     self.showTypingIndicator = false
                     
@@ -323,7 +323,7 @@ extension ChatViewController {
                 
         })
         
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         showTypingIndicator = true
         

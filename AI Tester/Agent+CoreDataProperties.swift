@@ -17,7 +17,7 @@ extension Agent {
     @NSManaged var agentDescription: String?
     @NSManaged var agentName: String
     @NSManaged var clientAccessToken: String?
-    @NSManaged var lastUpdate: NSDate
+    @NSManaged var lastUpdate: Date
     @NSManaged var uniqueId: String
     @NSManaged var messages: NSSet?
 
