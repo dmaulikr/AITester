@@ -286,10 +286,16 @@ extension ChatViewController {
         
         request?.setCompletionBlockSuccess({ request, response in
             
-            let json = JSON(response)
+            var apiAiAnswer = ""
             
-            let apiAiAnswer = json["result"]["fulfillment"]["speech"].stringValue
-            
+            if let response = response {
+                
+                let json = JSON(response)
+                
+                apiAiAnswer = json["result"]["fulfillment"]["speech"].stringValue
+                
+            }
+
             DispatchQueue.main.async {
                 
                 if apiAiAnswer == "" {
