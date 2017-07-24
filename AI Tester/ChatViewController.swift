@@ -169,9 +169,11 @@ class ChatViewController: JSQMessagesViewController {
         
         for savedMessage in savedMessages {
             
-            let message = JSQMessage(senderId: savedMessage.senderId, displayName: "", text: savedMessage.messageText)
-            
-            messages.append(message)
+            if let message = JSQMessage(senderId: savedMessage.senderId, displayName: "", text: savedMessage.messageText) {
+                
+                messages.append(message)
+                
+            }
             
         }
         

@@ -91,9 +91,15 @@ extension CoreDataManager {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: agentEntityName)
         
-        let numberOfAgents = managedObjectContext.count(for: fetchRequest, error: nil)
-        
-        return numberOfAgents
+        if let numberOfAgents = try? managedObjectContext.count(for: fetchRequest) {
+            
+            return numberOfAgents
+            
+        } else {
+            
+            return 0
+            
+        }
         
     }
     
